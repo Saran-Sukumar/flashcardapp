@@ -1,0 +1,46 @@
+# Flash Card App using Classes
+# Author: Saran
+# This program lets users create flash cards, quiz themselves, and track their score.
+# It includes motivational feedback and simple inclusive design (case-insensitive answers).
+
+class FlashCard:
+    def __init__(self, question, answer):
+        self.question = question
+        self.answer = answer
+
+class FlashCardSet:
+    def __init__(self, user_name):
+        self.user_name = user_name
+        self.cards = []
+        self.score = 0
+
+    def add_card(self, question, answer):
+        """Adds a new flash card to the set"""
+        card = FlashCard(question, answer)
+        self.cards.append(card)
+        print("Card added successfully!")
+
+    def quiz_user(self):
+        """Runs the quiz loop and tracks score"""
+        print(f"\nOkay {self.user_name}, let's start the quiz!")
+        for card in self.cards:
+            ans = input(card.question + " ")
+            if ans.lower() == card.answer.lower():   # inclusive: case-insensitive
+                self.score += 1
+                print("Correct! Great job!")        # motivational feedback
+            else:
+                print("Oops, the right answer was:", card.answer)
+        print(f"\nQuiz finished! Final score: {self.score}/{len(self.cards)}")
+
+# ---- Main Program ----
+print("Welcome to the Flash Card App!")
+name = input("What is your name? ")   # personalize interaction
+set1 = FlashCardSet(name)
+
+num_cards = int(input("How many flash cards do you want to add? "))  # numeric input
+for i in range(num_cards):
+    q = input(f"Enter question {i+1}: ")
+    a = input(f"Enter answer {i+1}: ")
+    set1.add_card(q, a)
+
+set1.quiz_user()
