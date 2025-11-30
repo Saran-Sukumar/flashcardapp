@@ -42,5 +42,6 @@ for i in range(num_cards):
     q = input(f"Enter question {i+1}: ")
     a = input(f"Enter answer {i+1}: ")
     set1.add_card(q, a)
+# Added motivational feedback to quiz loop
 
 set1.quiz_user()
